@@ -12,7 +12,10 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/contact', form);
+      await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"}/api/contact`,
+        form
+      );
       alert('Message sent!');
       setForm({ name: '', email: '', message: '' });
     } catch (err) {
@@ -50,7 +53,10 @@ export default function Contact() {
           onSubmit={handleSubmit}
           className="w-full max-w-lg bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg"
         >
-          <h1 className="text-3xl font-extrabold mb-6 text-center">Contact Me</h1>
+          <h1 className="text-3xl font-extrabold mb-6 text-center text-gray-900">
+            Contact Me
+          </h1>
+
           <input
             type="text"
             name="name"
@@ -60,6 +66,7 @@ export default function Contact() {
             className="w-full border border-gray-300 rounded px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
+
           <input
             type="email"
             name="email"
@@ -69,6 +76,7 @@ export default function Contact() {
             className="w-full border border-gray-300 rounded px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
+
           <textarea
             name="message"
             placeholder="Your Message"
@@ -78,6 +86,7 @@ export default function Contact() {
             rows="5"
             required
           ></textarea>
+
           <button
             type="submit"
             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-3 rounded transition"
